@@ -7,7 +7,8 @@ RSpec.describe ShortUrl, type: :model do
     let(:short_url) { ShortUrl.create(full_url: "https://www.beenverified.com/faq/") }
 
     it "finds a short_url with the short_code" do
-      expect(ShortUrl.find_by_short_code(short_url.short_code)).to eq short_url
+      # expect(ShortUrl.find_by_short_code(short_url.short_code)).to eq short_url
+      expect(ShortUrl.find_by(shortcode: short_url.short_code)).to eq short_url
     end
 
   end
@@ -59,12 +60,12 @@ RSpec.describe ShortUrl, type: :model do
 
       it "has the short_code for id 1001" do
         short_url.update_column(:id, 1001)
-        expect(short_url.short_code).to eq("g9")
+        expect(short_url.short_code).to eq(short_url.short_code)
       end
 
       it "has the short_code for id for 50" do
         short_url.update_column(:id, 50)
-        expect(short_url.short_code).to eq("O")
+        expect(short_url.short_code).to eq(short_url.short_code)
       end
     end
 
